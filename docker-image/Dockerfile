@@ -6,3 +6,5 @@ RUN /usr/local/bin/install-plugins.sh locale \
                                       greenballs \
                                       workflow-aggregator \
                                       github-organization-folder
+                                      
+ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
