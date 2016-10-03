@@ -20,3 +20,5 @@ RUN /usr/local/bin/install-plugins.sh locale \
                                       
 # Create the environment
 ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
+
+ENV BUILD_DATE=${BUILD_DATE}
