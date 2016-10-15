@@ -16,7 +16,8 @@ MAINTAINER SOO Support "soo@kadaster.nl"
 RUN /usr/local/bin/install-plugins.sh locale \
                                       greenballs \
                                       workflow-aggregator \
-                                      github-organization-folder
+                                      github-organization-folder \
+                                      nodejs
                                       
 # Create the environment
 ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
