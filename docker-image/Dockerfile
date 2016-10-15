@@ -24,4 +24,7 @@ ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
 
 # Extra configuration files
 COPY ref/ /usr/share/jenkins/ref/
-RUN chown -R jenkins:jenkins /usr/share/jenkins/ref
+
+# USER root
+# RUN chown -R jenkins:jenkins /usr/share/jenkins/ref
+# USER jenkins
