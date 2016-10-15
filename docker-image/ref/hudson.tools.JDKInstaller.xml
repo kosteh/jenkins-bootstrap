@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.tools.JDKInstaller_-DescriptorImpl>
+  <!-- Non-existing Oracle Account. This file must exist otherwise the configured JDKs will not be saved in file hudson.model.JDK.xml --> 
+  <username>OracleAccount</username>
+  <password>rQWaZh/XqzjU2kgKpP7FEw==</password>
+</hudson.tools.JDKInstaller_-DescriptorImpl>
