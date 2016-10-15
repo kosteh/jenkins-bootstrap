@@ -9,7 +9,7 @@
 #
 
 # Use the (latest if possible) LTS version of Jenkins
-FROM jenkins:2.7.4
+FROM jenkins:2.19.1
 MAINTAINER SOO Support "soo@kadaster.nl"
 
 # Install all wanted plugins 
@@ -24,4 +24,4 @@ ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
 
 # Extra configuration files
 COPY ref/ /usr/share/jenkins/ref/
-RUN chmod -R jenkins:jenkins /usr/share/jenkins/ref
+RUN chown -R jenkins:jenkins /usr/share/jenkins/ref
