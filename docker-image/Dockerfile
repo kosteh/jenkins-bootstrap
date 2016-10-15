@@ -22,8 +22,6 @@ RUN /usr/local/bin/install-plugins.sh locale \
 # Create the environment
 ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
 
-COPY ref/* /usr/share/jenkins/ref/
-
-ARG BUILD_DATE
-
-RUN echo ${BUILD_DATE}
+# Extra configuration files
+COPY ref/ /usr/share/jenkins/ref/
+RUN chmod -R jenkins:jenkins /usr/share/jenkins/ref
