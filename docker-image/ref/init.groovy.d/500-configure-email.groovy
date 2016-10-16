@@ -13,3 +13,6 @@ desc.setCharset(System.getProperty("smtp.charSet"))
 
 // Persist it
 desc.save()
+
+// Unset sensitive property
+System.clearProperty("smtp.password")
