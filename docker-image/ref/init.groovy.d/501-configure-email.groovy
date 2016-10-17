@@ -24,7 +24,6 @@ if ( mailCreds == null )
 {
     println ""
     println "ERROR: Check the presence of the MAIL-USER credential set."
-    println ""
 }
 
 // Check the presence of all JENKINS_MAIL environment variables
@@ -35,9 +34,8 @@ if ( ev["JENKINS_MAIL_HOST"]        == null || ev["JENKINS_MAIL_PORT"]     == nu
 {
     println ""
     println "ERROR: Check the presence of all JENKINS_MAIL_XXX environment variables."
-    println "       One of more variables are missing.
-    println ""
-  
+    println "       One of more variables are missing."
+
     ev = null
 }
 
@@ -67,3 +65,6 @@ else
     // Persist it
     mailDesc.save()
 }
+
+println ""
+println "------ END ---------------------------------------------------------"
