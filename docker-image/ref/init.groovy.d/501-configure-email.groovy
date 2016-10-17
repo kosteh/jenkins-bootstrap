@@ -28,9 +28,9 @@ if ( mailCreds == null )
 
 // Check the presence of all JENKINS_MAIL environment variables
 def Map ev = System.getenv()
-if ( ev["JENKINS_MAIL_HOST"]        == null || ev["JENKINS_MAIL_PORT"]     == null || 
-     ev["JENKINS_MAIL_SSL"]         == null || ev["JENKINS_MAIL_USER"]     == null ||
-     ev["JENKINS_REPLY_TO_ADDRESS"] == null || ev["JENKINS_MAIL_CHARSET"]  == null )
+if ( ev["JENKINS_MAIL_HOST"]             == null || ev["JENKINS_MAIL_PORT"]     == null || 
+     ev["JENKINS_MAIL_SSL"]              == null || ev["JENKINS_MAIL_USER"]     == null ||
+     ev["JENKINS_MAIL_REPLY_TO_ADDRESS"] == null || ev["JENKINS_MAIL_CHARSET"]  == null )
 {
     println ""
     println "ERROR: Check the presence of all JENKINS_MAIL_XXX environment variables."
