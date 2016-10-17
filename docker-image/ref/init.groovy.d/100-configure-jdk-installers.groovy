@@ -12,7 +12,7 @@ import jenkins.model.*
 import hudson.model.*
 import hudson.tools.*
   
-println "------ Configure Docker installers ---------------------------------"
+println "------ Configure JDK installers ------------------------------------"
 println ""
 
 def inst = Jenkins.getInstance()
