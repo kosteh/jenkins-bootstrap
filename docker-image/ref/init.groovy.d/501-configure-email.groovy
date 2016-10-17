@@ -53,17 +53,16 @@ else
     println "Jenkins Mail SSL ?   = ${ev["JENKINS_MAIL_SSL"]}"
     println "Jenkins Mail user    = ${ev["JENKINS_MAIL_USER"]}"
     println "Jenkins Mail passwd  = <secret>"
-    println "Jenkins Mail replyTo = ${ev["JENKINS_REPLY_TO_ADDRESS"]
-}"
-    println "Mail charset = ${omc[6]}"
+    println "Jenkins Mail replyTo = ${ev["JENKINS_REPLY_TO_ADDRESS"]}"
+    println "Jenkins Mail charset = ${ev["JENKINS_MAIL_CHARSET"]}"
 
     def mailDesc = jenkins.model.Jenkins.instance.getDescriptor("hudson.tasks.Mailer")
-    mailDesc.setSmtpHost(omc[0])
-    mailDesc.setSmtpPort(omc[1])
-    mailDesc.setUseSsl(Boolean.valueOf(omc[2]))
-    mailDesc.setSmtpAuth(omc[3], omc[4])
-    mailDesc.setReplyToAddress(omc[5])
-    mailDesc.setCharset(omc[6])
+    mailDesc.setSmtpHost(ev["JENKINS_MAIL_HOST"])
+    mailDesc.setSmtpPort(ev["JENKINS_MAIL_PORT"])
+    mailDesc.setUseSsl(Boolean.valueOf(ev["JENKINS_MAIL_SSL"]))
+    mailDesc.setSmtpAuth(ev["JENKINS_MAIL_USER"], mailCreds.password)
+    mailDesc.setReplyToAddress(ev["JENKINS_REPLY_TO_ADDRESS"])
+    mailDesc.setCharset(ev["JENKINS_MAIL_CHARSET"])
 
     // Persist it
     mailDesc.save()
