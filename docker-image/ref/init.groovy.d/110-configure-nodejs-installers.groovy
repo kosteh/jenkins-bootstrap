@@ -28,6 +28,7 @@ def versions = [
 def installations = [];
 
 for (v in versions) {
+  println "${v.key}: ${v.value}"
   def installer = new NodeJSInstaller(v.value, "bower bower-art", 100)
   def installerProps = new InstallSourceProperty([installer])
   def installation = new NodeJSInstallation(v.key, "", [installerProps])
