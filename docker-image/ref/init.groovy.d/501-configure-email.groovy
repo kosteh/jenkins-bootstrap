@@ -6,7 +6,7 @@ This scripts configures the Jenkins e-mail configuration, that can be specified 
 configuration page "Jenkins->Manage Jenkins->Configure System".
 
 The configuration parameters are provided through environment variables mainly. The password is provided 
-by a Jenkins user-password credential.
+by a Jenkins user-password credential named JENKINS_MAIL_USER.
 
 */
 
@@ -41,7 +41,8 @@ if ( ev["JENKINS_MAIL_HOST"]        == null || ev["JENKINS_MAIL_PORT"]     == nu
 
 if ( mailCreds == null || ev == null ) 
 {
-    println "ERROR: Jenkins Outbound Mail configuration NOT set."
+    println ""
+    println "ERROR: Jenkins Outbound Mail configuration CANNOT be set."
     return
 }
 else
