@@ -12,7 +12,7 @@ by a Jenkins user-password credential named JENKINS_MAIL_USER.
 
 import jenkins.model.*
 
-println "------ Set Jenkins outbound e-mail configuration -------------------"
+println "------ Jenkins outbound e-mail configuration -----------------------"
 
 // Check the presence of the MAIL-USER credential set
 def mailUser    = "MAIL-USER"
@@ -43,7 +43,6 @@ if ( mailCreds == null || ev == null )
 {
     println ""
     println "ERROR: Jenkins Outbound Mail configuration CANNOT be set."
-    return
 }
 else
 {
