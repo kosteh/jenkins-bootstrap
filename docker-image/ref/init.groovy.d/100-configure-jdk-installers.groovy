@@ -11,6 +11,9 @@ Define one or more versions in the "versions" map.
 import jenkins.model.*
 import hudson.model.*
 import hudson.tools.*
+  
+println "------ Configure Docker installers ---------------------------------"
+println ""
 
 def inst = Jenkins.getInstance()
 def desc = inst.getDescriptor("hudson.model.JDK")
@@ -24,6 +27,7 @@ def versions = [
 def installations = [];
 
 for (v in versions) {
+  println "${v.key}: ${v.value}"
   def installer = new JDKInstaller(v.value, true)
   def installerProps = new InstallSourceProperty([installer])
   def installation = new JDK(v.key, "", [installerProps])
@@ -33,3 +37,6 @@ for (v in versions) {
 // Persist the JDK configuration
 desc.setInstallations(installations.toArray(new JDK[0]))
 desc.save() 
+
+println ""
+println "------ END ---------------------------------------------------------"
