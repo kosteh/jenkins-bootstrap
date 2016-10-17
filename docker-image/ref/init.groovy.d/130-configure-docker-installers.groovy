@@ -1,5 +1,5 @@
 println "------ Configure Docker installers ---------------------------------"
 println ""
-println "ERROR: No Docker installers defined."
+println "INFO : No Docker installers defined."
 println ""
 println "------ END ---------------------------------------------------------"
