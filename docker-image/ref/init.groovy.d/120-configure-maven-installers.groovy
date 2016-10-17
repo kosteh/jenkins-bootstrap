@@ -1,5 +1,5 @@
-println "------ Configure Maven installers -------------------------------------------"
+println "------ Configure Maven installers ----------------------------------"
 println ""
 println "ERROR: No Maven installers defined."
 println ""
-println "------ END ------------------------------------------------------------------"
+println "------ END ---------------------------------------------------------"
