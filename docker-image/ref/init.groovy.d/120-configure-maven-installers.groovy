@@ -1,29 +1,45 @@
-println "------ Configure Maven installers ----------------------------------"
-println ""
-println "INFO : No Maven installers defined."
-println ""
-println "------ END ---------------------------------------------------------"
+/*
 
-return
+Purpose:
+Configures a number of Maven auto-installers.
+
+Usage:
+Define one or more versions in the "versions" map.
+
+*/
 
 import jenkins.model.*
+import hudson.model.*
+import hudson.tools.*
+  
+println "------ Configure Maven installers ------------------------------------"
+println ""
 
-println "Adding an auto installers for Maven"
+def inst = Jenkins.getInstance()
+def desc = inst.getDescriptor("hudson.tasks.Maven")
 
-def mavenPluginExtension = Jenkins.instance.getExtensionList(hudson.tasks.Maven.DescriptorImpl.class)[0]
+// Define and configure a number of MAven installations
+def versions = [
+  "Maven Latest"   : "3.3.9",
+  "Maven 3 Latest" : "3.3.9",
+  "Maven 3.3.9"    : "3.3.9",
+  "Maven 2 Latest" : "2.2.1",
+  "Maven 2.2.1"    : "2.2.1"
+]
 
-// Current installations:
-// def asList = (mavenPluginExtension.installations as List)
-// Start over with empty list of installations
-aslist = []
-// Add installations 
-asList.add(new hudson.tasks.Maven.MavenInstallation('Maven Latest', null, 
-      [new hudson.tools.InstallSourceProperty([new hudson.tasks.Maven.MavenInstaller("3.3.9")])]
-asList.add(new hudson.tasks.Maven.MavenInstallation('Maven 3.3.9', null, 
-      [new hudson.tools.InstallSourceProperty([new hudson.tasks.Maven.MavenInstaller("3.3.9")])]
+def installations = [];
 
-mavenPluginExtension.installations = asList
+for (v in versions) {
+  println "${v.key}: ${v.value}"
+  def installer = new hudson.tasks.Maven.MavenInstaller(v.value)
+  def installerProps = new InstallSourceProperty([installer])
+  def installation = new hudson.tasks.Maven.MavenInstallation(v.key, null, [installerProps])
+  installations.push(installation)
+}
 
-mavenPluginExtension.save()
-println "OK - Maven auto-installers (from Apache) added" 
+// Persist the Maven tool configuration
+desc.setInstallations(installations)
+desc.save() 
 
+println ""
+println "------ END ---------------------------------------------------------"
