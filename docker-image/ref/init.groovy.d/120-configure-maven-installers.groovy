@@ -9,14 +9,13 @@ Define one or more versions in the "versions" map.
 */
 
 import jenkins.model.*
-import hudson.model.*
+import hudson.tasks.*
 import hudson.tools.*
   
 println "------ Configure Maven installers ------------------------------------"
 println ""
 
-def inst = Jenkins.getInstance()
-def desc = inst.getDescriptor("hudson.tasks.Maven")
+def desc = Jenkins.instance.getDescriptor("hudson.tasks.Maven")
 
 // Define and configure a number of MAven installations
 def versions = [
@@ -31,14 +30,14 @@ def installations = [];
 
 for (v in versions) {
   println "${v.key}: ${v.value}"
-  def installer = new hudson.tasks.Maven.MavenInstaller(v.value)
+  def installer = new Maven.MavenInstaller(v.value)
   def installerProps = new InstallSourceProperty([installer])
-  def installation = new hudson.tasks.Maven.MavenInstallation(v.key, null, [installerProps])
+  def installation = new Maven.MavenInstallation(v.key, null, [installerProps])
   installations.push(installation)
 }
 
 // Persist the Maven tool configuration
-desc.setInstallations(installations)
+desc.setInstallations(installations.toArray(new Maven.MavenInstallation[0]))
 desc.save() 
 
 println ""
