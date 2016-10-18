@@ -1,33 +1,41 @@
+/*
+
+Purpose:
+Configures a number of JDK auto-installers.
+
+Usage:
+Define one or more versions in the "versions" map.
+
+*/
+
 import jenkins.model.*
-import hudson.tasks.*
+import hudson.model.*
 import hudson.tools.*
   
-println "------ Configure Maven installers ------------------------------------"
+println "------ Configure JDK installers ------------------------------------"
 println ""
 
-def desc = Jenkins.instance.getDescriptor("hudson.tasks.Maven")
+def inst = Jenkins.getInstance()
+def desc = inst.getDescriptor("hudson.model.JDK")
 
-// Define and configure a number of MAven installations
+// Define and configure a number of JDK installations
 def versions = [
-  "Maven Latest"   : "3.3.9",
-  "Maven 3 Latest" : "3.3.9",
-  "Maven 3.3.9"    : "3.3.9",
-  "Maven 2 Latest" : "2.2.1",
-  "Maven 2.2.1"    : "2.2.1"
+  "JDK Latest" : "jdk-8u102-oth-JPR",
+  "JDK 8u102"  : "jdk-8u102-oth-JPR"
 ]
 
 def installations = [];
 
 for (v in versions) {
   println "${v.key}: ${v.value}"
-  def installer = new Maven.MavenInstaller(v.value)
+  def installer = new JDKInstaller(v.value, true)
   def installerProps = new InstallSourceProperty([installer])
-  def installation = new Maven.MavenInstallation(v.key, null, [installerProps])
+  def installation = new JDK(v.key, "", [installerProps])
   installations.push(installation)
 }
 
-// Persist the Maven tool configuration
-desc.setInstallations(installations.toArray(new Maven.MavenInstallation[0]))
+// Persist the JDK configuration
+desc.setInstallations(installations.toArray(new JDK[0]))
 desc.save() 
 
 println ""
