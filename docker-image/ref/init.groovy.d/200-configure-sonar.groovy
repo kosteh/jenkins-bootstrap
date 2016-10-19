@@ -19,18 +19,19 @@ def ev   = System.getenv()
 
 def desc = Jenkins.instance.getDescriptor("hudson.plugins.sonar.SonarPublisher")
 
-def sinst = new SonarInstallation( ev["SONAR_INSTALLATION_NAME"] ? ev["SONAR_INSTALLATION_NAME"] : "",
-                                   ev["SONAR_ENABLED"] ? Boolean.toValue(ev["SONAR_ENABLED"]) : true,
-                                   ev["SONAR_SERVER_URL"] ? ev["SONAR_SERVER_URL"] : "",
-                                   ev["SONAR_DATABASE_URL"] ? ev["SONAR_DATABASE_URL"] : "",
-                                   ev["SONAR_DATABASE_DRIVER"] ? ev["SONAR_DATABASE_DRIVER"] : "",
-                                   ev["SONAR_DATABASE_USER"] ? ev["SONAR_DATABASE_USER"] : "",
-                                   ev["SONAR_DATABASE_PASSWORD"] ? ev["SONAR_DATABASE_PASSWORD"] : "",
-                                   ev["SONAR_MAVEN_PLUGIN_VERSION"] ? ev["SONAR_MAVEN_PLUGIN_VERSION"] : "",
-                                   ev["SONAR_MAVEN_PROPERTIES"] ? ev["SONAR_MAVEN_PROPERTIES"] : "",
+def sinst = new SonarInstallation( ev["SQ_NAME"] ? ev["SQ_NAME"] : "SonarQube",
+                                   ev["SQ_SERVER_URL"] ? ev["SQ_SERVER_URL"] : "http://ota-portal.so.kadaster.nl/sonar",
+                                   ev["SQ_VERSION"] ? ev["SQ_VERSION"] : "5.3",
+                                   ev["SQ_AUTH_TOKEN"] ? ev["SQ_AUTH_TOKEN"] : "",
+                                   ev["SQ_DATABASE_URL"] ? ev["SQ_DATABASE_URL"] : "<NOT_USED_SINCE_5.3>",
+                                   ev["SQ_DATABASE_LOGIN"] ? ev["SQ_DATABASE_LOGIN"] : "<NOT_USED_SINCE_5.3>",
+                                   ev["SQ_DATABASE_PASSWORD"] ? ev["SQ_DATABASE_PASSWORD"] : "<NOT_USED_SINCE_5.3>",
+                                   ev["SQ_MAVEN_PLUGIN_VERSION"] ? ev["SQ_MAVEN_PLUGIN_VERSION"] : "",
+                                   ev["SQ_MAVEN_PROPERTIES"] ? ev["SQ_MAVEN_PROPERTIES"] : "",
                                    new TriggersConfig(),
-                                   ev["SONAR_USER"] ? ev["SONAR_USER"] : "",
-                                   ev["SONAR_PASSWORD"] ? ev["SONAR_PASSWORD"] : "" )
+                                   ev["SQ_USER"] ? ev["SQ_USER"] : "<NOT_USED_SINCE_5.3>",
+                                   ev["SQ_PASSWORD"] ? ev["SQ_PASSWORD"] : "<NOT_USED_SINCE_5.3>",
+                                   ev["SQ_ANALYSIS_PROPERTIES" ? ev["SQ_ANALYSIS_PROPERTIES"] : "" )
 
 // Persist the Sonar installation
 desc.setInstallations(sinst)
