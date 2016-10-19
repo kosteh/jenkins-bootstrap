@@ -56,7 +56,6 @@ else
         desc.setInstallations(sinst)
         desc.save()
       
-        println ""
         println "INFO: SonarQube is configured succesfully."    
       
     }
