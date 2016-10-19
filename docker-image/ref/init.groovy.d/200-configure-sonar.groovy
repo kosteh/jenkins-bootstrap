@@ -36,12 +36,11 @@ else
     }
     else
     {
-      
         def sinst = new SonarInstallation( 
                                        ev["SQ_NAME"] ? ev["SQ_NAME"] : "SonarQube",
                                        ev["SQ_SERVER_URL"] ? ev["SQ_SERVER_URL"] : "http://ota-portal.so.kadaster.nl/sonar",
                                        ev["SQ_VERSION"] ? ev["SQ_VERSION"] : "5.3",
-                                       ev["SQ_AUTH_TOKEN"] ? ev["SQ_AUTH_TOKEN"] : "",
+                                       ev["SQ_AUTH_TOKEN"] ? ev["SQ_AUTH_TOKEN"] : sqCreds.password.toString(),
                                        ev["SQ_DATABASE_URL"] ? ev["SQ_DATABASE_URL"] : "<NOT_USED_SINCE_5.3>",
                                        ev["SQ_DATABASE_LOGIN"] ? ev["SQ_DATABASE_LOGIN"] : "<NOT_USED_SINCE_5.3>",
                                        ev["SQ_DATABASE_PASSWORD"] ? ev["SQ_DATABASE_PASSWORD"] : "<NOT_USED_SINCE_5.3>",
