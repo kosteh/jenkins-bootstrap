@@ -33,6 +33,14 @@ jenkins.setNumExecutors(4)
 // Set master execution labels
 jenkins.setLabelString('master')
 
+// Set usage
+
+// Set Quiet period
+jenkins.setQuietPeriod(5)
+
+// Set SCM checkout retry count
+jenkins.setScmCheckoutRetryCount(5)
+
 // Persist the Jenkins configuration
 jenkins.save()
 
