@@ -17,7 +17,7 @@ def pluginWrapper = jenkins.getPluginManager().getPlugin('locale')
 def plugin = pluginWrapper.getPlugin()
 
 def ev = System.getenv()
-plugin.setSystemLocale(ev["JENKINS_LOCALE"] ? ev["JENKINS_LOCALE"] : 'en_EN'
+plugin.setSystemLocale(ev["JENKINS_LOCALE"] ? ev["JENKINS_LOCALE"] : 'en_EN' )
 plugin.ignoreAcceptLanguage = ev["JENKINS_LOCALE_IGNORE_ACCEPT_LANGUAGE"] ? Boolean.valueOf["JENKINS_LOCALE_IGNORE_ACCEPT_LANGUAGE"] : true
 
 // Persist the settings
