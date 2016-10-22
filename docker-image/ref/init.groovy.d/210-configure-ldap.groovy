@@ -22,7 +22,7 @@ def ldapUser    = "JENKINS-LDAP-USER"
 def credentials = com.cloudbees.plugins.credentials.CredentialsProvider.lookupCredentials(
                        com.cloudbees.plugins.credentials.common.StandardUsernamePasswordCredentials.class,
                        jenkins.model.Jenkins.instance )
-def ldapCreds   = credentials.findResult { it.username == ldapUser ? it : null }
+def ldapCreds   = credentials.findResult { it.id == ldapUser ? it : null }
 if ( ldapCreds == null )
 {
     println "ERROR: The JENKINS-LDAP-USER credential set not found."
@@ -36,7 +36,7 @@ else
     def userSearchBase             = ev["JENKINS_LDAP_USER_SEARCHBASE"] ? ev["JENKINS_LDAP_USER_SEARCHBASE"] : ''
     def userSearch                 = ev["JENKINS_LDAP_USER_SEARCH"] ? ev["JENKINS_LDAP_USER_SEARCH"] : ''
     def groupSearchBase            = ev["JENKINS_LDAP_GROUP_SEARCHBASE"] ? ev["JENKINS_LDAP_GROUP_SEARCHBASE"] : ''
-    def managerDN                  = ev["JENKINS_LDAP_MANAGERDN"] ? ev["JENKINS_LDAP_MANAGERDN"] : ldapCreds.user
+    def managerDN                  = ev["JENKINS_LDAP_MANAGERDN"] ? ev["JENKINS_LDAP_MANAGERDN"] : ldapCreds.username
     def managerPassword            = ev["JENKINS_LDAP_PASSWORD"] ? ev["JENKINS_LDAP_PASSWORD"] : ldapCreds.password.toString()
     def inhibitInferRootDN         = ev["JENKINS_LDAP_INHIBIT_INFER_ROOTDN"] ? Boolean.valueOf(ev["JENKINS_LDAP_INHIBIT_INFER_ROOTDN"]) : false
     def disableMailAddressResolver = ev["JENKINS_LDAP_DISABLE_MAIL_ADDRESS_RESOLVER"] ? Boolean.valueOf(ev["JENKINS_LDAP_DISABLE_MAIL_ADDRESS_RESOLVER"]) : false
