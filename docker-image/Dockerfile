@@ -13,11 +13,11 @@ FROM jenkins:2.19.1
 MAINTAINER SOO Support "soo@kadaster.nl"
 
 # Install all wanted plugins 
-RUN /usr/local/bin/install-plugins.sh locale \
+RUN /usr/local/bin/install-plugins.sh github-organization-folder \
                                       greenballs \
-                                      workflow-aggregator \
-                                      github-organization-folder \
-                                      nodejs
+                                      locale \
+                                      nodejs \
+                                      workflow-aggregator
                                       
 # Create the environment
 ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
