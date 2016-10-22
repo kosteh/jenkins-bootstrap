@@ -18,6 +18,7 @@ RUN /usr/local/bin/install-plugins.sh github-organization-folder \
                                       ldap \
                                       locale \
                                       nodejs \
+                                      sonar \
                                       workflow-aggregator
                                       
 # Create the environment
