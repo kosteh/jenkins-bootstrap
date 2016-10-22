@@ -15,6 +15,7 @@ MAINTAINER SOO Support "soo@kadaster.nl"
 # Install all wanted plugins 
 RUN /usr/local/bin/install-plugins.sh github-organization-folder \
                                       greenballs \
+                                      ldap \
                                       locale \
                                       nodejs \
                                       workflow-aggregator
