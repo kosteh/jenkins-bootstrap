@@ -15,8 +15,11 @@ println ""
 
 def ev = System.getenv()
 
-System.setProperty("user.timezone", ev["JENKINS_TIMEZONE"] ? ev["JENKINS_TIMEZONE"] : "Europe/Amsterdam")
-println "Jenkins timezone set to: ${System.getProperty("user.timezone")}"
+System.setProperty('org.apache.commons.jelly.tags.fmt.timeZone', ev["JENKINS_TIMEZONE"] ? ev["JENKINS_TIMEZONE"] : 'Europe/Amsterdam')
+println "Jenkins property 'org.apache.commons.jelly.tags.fmt.timeZone' set to: ${System.getProperty('org.apache.commons.jelly.tags.fmt.timeZone')}"
+
+System.setProperty('user.timezone', ev["JENKINS_TIMEZONE"] ? ev["JENKINS_TIMEZONE"] : 'Europe/Amsterdam')
+println "Jenkins property 'user.timezone' set to: ${System.getProperty('user.timezone')}"
 
 println ""
 println "------ END ---------------------------------------------------------"
