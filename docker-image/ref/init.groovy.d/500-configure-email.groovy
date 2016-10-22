@@ -34,7 +34,7 @@ else
          ev["JENKINS_MAIL_REPLY_TO_ADDRESS"] == null || 
          ev["JENKINS_MAIL_CHARSET"]          == null )
     {
-        println "ERROR: Check the presence of all JENKINS_MAIL_XXX environment variables."
+        println "ERROR: Check the presence of the JENKINS_MAIL_XXX environment variables."
         println "       One of more variables are missing."
     }
     else
