@@ -5,7 +5,7 @@ This scripts configures the Jenkins e-mail configuration, that can be specified 
 configuration page "Jenkins->Manage Jenkins->Configure System".
 
 Usage:
-The configuration parameters are provided through environment variables named JENKINS_MAIL_XXX mainly. 
+The configuration parameters are provided through environment variables named JENKINS_MAIL_XXX. 
 The password is provided by a Jenkins user-password credential named JENKINS-MAIL-USER.
 
 */
@@ -28,14 +28,14 @@ if ( mailCreds == null )
 else
 {
     def Map ev = System.getenv()
-    if ( ev["JENKINS_MAIL_HOST"]             == null || ev["JENKINS_MAIL_PORT"]     == null || 
+    if ( ev["JENKINS_MAIL_HOST"]             == null || 
+         ev["JENKINS_MAIL_PORT"]             == null || 
          ev["JENKINS_MAIL_SSL"]              == null || 
-         ev["JENKINS_MAIL_REPLY_TO_ADDRESS"] == null || ev["JENKINS_MAIL_CHARSET"]  == null )
+         ev["JENKINS_MAIL_REPLY_TO_ADDRESS"] == null || 
+         ev["JENKINS_MAIL_CHARSET"]          == null )
     {
         println "ERROR: Check the presence of all JENKINS_MAIL_XXX environment variables."
         println "       One of more variables are missing."
-
-        ev = null
     }
     else
     {
@@ -46,23 +46,27 @@ else
             println "Jenkins Mail port     = ${ev["JENKINS_MAIL_PORT"]}"
             println "Jenkins Mail SSL ?    = ${ev["JENKINS_MAIL_SSL"]}"
             println "Jenkins Mail user     = ${mailCreds.username}"
-            println "Jenkins Mail passwd   = <secret>"
+            println "Jenkins Mail password = <secret>"
             println "Jenkins Mail reply to = ${ev["JENKINS_MAIL_REPLY_TO_ADDRESS"]}"
             println "Jenkins Mail charset  = ${ev["JENKINS_MAIL_CHARSET"]}"
+          
             mailDesc.setSmtpHost(ev["JENKINS_MAIL_HOST"])
             mailDesc.setSmtpPort(ev["JENKINS_MAIL_PORT"])
             mailDesc.setUseSsl(Boolean.valueOf(ev["JENKINS_MAIL_SSL"]))
             mailDesc.setSmtpAuth(mailCreds.username , Secret.toString(mailCreds.password))
-            mailDesc.setReplyToAddress(ev["JENKINS_REPLY_TO_ADDRESS"] ? ev["JENKINS_REPLY_TO_ADDRESS"] : 'noreply@site.com' )
-            mailDesc.setCharset(ev["JENKINS_MAIL_CHARSET"] ? ev["JENKINS_MAIL_CHARSET"] : 'UTF-8' )
-            // Persist it
+            mailDesc.setReplyToAddress(ev["JENKINS_REPLY_TO_ADDRESS"])
+            mailDesc.setCharset(ev["JENKINS_MAIL_CHARSET"])
             mailDesc.save()
-        }
+          
+            println ""
+            println "INFO: Jenkins Mail configuration set successfully."
+         }
         else
         {
             println "ERROR: Jenkins Mail configuration failed."
         }
     }
 }
+
 println ""
 println "------ END ---------------------------------------------------------"
