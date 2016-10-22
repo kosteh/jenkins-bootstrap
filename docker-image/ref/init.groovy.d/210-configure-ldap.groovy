@@ -18,11 +18,10 @@ println "------ Jenkins LDAP configuration ----------------------------------"
 println ""
 
 // Check the presence of the JENKINS-LDAP-USER credential set
-def ldapUser    = "JENKINS-LDAP-USER"
 def credentials = com.cloudbees.plugins.credentials.CredentialsProvider.lookupCredentials(
                        com.cloudbees.plugins.credentials.common.StandardUsernamePasswordCredentials.class,
                        jenkins.model.Jenkins.instance )
-def ldapCreds   = credentials.findResult { it.id == ldapUser ? it : null }
+def ldapCreds   = credentials.findResult { it.id == "JENKINS-LDAP-USER" ? it : null }
 if ( ldapCreds == null )
 {
     println "ERROR: The JENKINS-LDAP-USER credential set not found."
