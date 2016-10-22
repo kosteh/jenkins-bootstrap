@@ -45,26 +45,24 @@ else
             println "Jenkins Mail host     = ${ev["JENKINS_MAIL_HOST"]}"
             println "Jenkins Mail port     = ${ev["JENKINS_MAIL_PORT"]}"
             println "Jenkins Mail SSL ?    = ${ev["JENKINS_MAIL_SSL"]}"
-            println "Jenkins Mail user     = mailCreds.username
+            println "Jenkins Mail user     = ${mailCreds.username}"
             println "Jenkins Mail passwd   = <secret>"
             println "Jenkins Mail reply to = ${ev["JENKINS_MAIL_REPLY_TO_ADDRESS"]}"
             println "Jenkins Mail charset  = ${ev["JENKINS_MAIL_CHARSET"]}"
-
             mailDesc.setSmtpHost(ev["JENKINS_MAIL_HOST"])
             mailDesc.setSmtpPort(ev["JENKINS_MAIL_PORT"])
-            mailDesc.setUseSsl(Boolean.valueOf(ev["JENKINS_MAIL_SSL"])
+            mailDesc.setUseSsl(Boolean.valueOf(ev["JENKINS_MAIL_SSL"]))
             mailDesc.setSmtpAuth(mailCreds.username , Secret.toString(mailCreds.password))
             mailDesc.setReplyToAddress(ev["JENKINS_REPLY_TO_ADDRESS"] ? ev["JENKINS_REPLY_TO_ADDRESS"] : 'noreply@site.com' )
-            mailDesc.setCharset(ev["JENKINS_MAIL_CHARSET"] ? ev["JENKINS_MAIL_CHARSET"] : 'UTF-8')
-
+            mailDesc.setCharset(ev["JENKINS_MAIL_CHARSET"] ? ev["JENKINS_MAIL_CHARSET"] : 'UTF-8' )
             // Persist it
             mailDesc.save()
         }
         else
         {
             println "ERROR: Jenkins Mail configuration failed."
+        }
     }
 }
-
 println ""
 println "------ END ---------------------------------------------------------"
