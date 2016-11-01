@@ -1,0 +1,1 @@
+// Sets default Jenkins properties
