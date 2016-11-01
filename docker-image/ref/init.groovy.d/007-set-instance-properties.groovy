@@ -1,0 +1,1 @@
+// sets instance properties
