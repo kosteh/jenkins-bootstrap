@@ -1,7 +1,13 @@
 // Sets the default Jenkins properties
 
-Properties props = new Properties()
-File propsFile = new File('/tmp/jenkins.properties')
-props.load(propsFile.newDataInputStream())
+println "----------- SET DEFAULT PROPERTIES -------------------------------"
 
-for (prop in props) println "$prop.key = $prop.value"
+def jenkinsHome = System.getenv("JENKINS_HOME")
+
+Properties properties = new Properties()
+File propertiesFile = new File("${jenkinsHome}/jenkins.properties")
+properties.load(propertiesFile.newDataInputStream())
+
+for (property in properties) println "${property.key} = ${property.value}"
+                               
+println "----------- END --------------------------------------------------"
