@@ -1,6 +1,6 @@
 // Sets the default Jenkins properties
 
-println "----------- SET DEFAULT PROPERTIES -------------------------------"
+println "----------- SET DEFAULT JENKINS PROPERTIES -----------------------"
 
 def jenkinsHome = System.getenv("JENKINS_HOME")
 
