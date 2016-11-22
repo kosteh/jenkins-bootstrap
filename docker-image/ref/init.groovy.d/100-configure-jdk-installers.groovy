@@ -1,7 +1,10 @@
 /*
 
 Purpose:
-Configures a number of JDK auto-installers.
+Configures a number of Docker tool auto-installers.
+
+Used API:
+http://javadoc.jenkins.io/plugin/docker-commons/index.html?org/jenkinsci/plugins/docker/commons/tools
 
 Usage:
 Define one or more versions in the "versions" map.
