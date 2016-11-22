@@ -23,7 +23,7 @@ println "------ Configure Dockertools -------------------------------------"
 println ""
 
 // Define and configure a number of DockerTool installations
-def dockerTools = [
+def tools = [
   "Docker Latest" : "1.12.3",
   "Docker 1.12"   : "1.12.3",
   "Docker 1.12.3" : "1.12.3",
@@ -33,16 +33,16 @@ def dockerTools = [
 
 // Remove existing Dockertool installations (/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool)
 def dir = "${System.getenv("JENKINS_HOME")}/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool"
-def dockertoolDir = new File(dir)
-if ( dockertoolDir.deleteDir()) {
-  println "Dockertool directory ${dir} deleted successfully\n"
+def toolDir = new File(dir)
+if ( toolDir.deleteDir()) {
+  println "Tools directory ${dir} deleted successfully\n"
 }
 
 // Configure the Dockertools
 def installations = []
 def descriptor = Jenkins.getInstance().getDescriptor("org.jenkinsci.plugins.docker.commons.tools.DockerTool")
 
-for (tool in dockerTools) {
+for (tool in tools) {
   def installer = new DockerToolInstaller(tool.key, tool.value)
   def installSourceProp = new InstallSourceProperty([installer])
   def installation = new DockerTool(tool.key, null, [installSourceProp])
@@ -54,7 +54,7 @@ descriptor.setInstallations(installations.toArray(new DockerTool[0]))
 descriptor.save()
 
 // Print installed Docker tool versions
-descriptor.getInstallations().each { DockerTool tool -> println "${tool.getName()} : ${dockerTools[tool.getName()]}" }
+descriptor.getInstallations().each { DockerTool tool -> println "${tool.getName()} : ${tools[tool.getName()]}" }
 
 println ""
 println "------ END ---------------------------------------------------------"
