@@ -9,37 +9,54 @@ http://javadoc.jenkins.io/plugin/docker-commons/index.html?org/jenkinsci/plugins
 Usage:
 Define one or more versions in the "versions" map.
 
+Todo:
+Find out how to delete the slaves' "tools" directory
+
 */
 
-import jenkins.model.*
-import hudson.model.*
-import hudson.tools.*
-  
-println "------ Configure JDK installers ------------------------------------"
+import org.jenkinsci.plugins.docker.commons.tools.DockerTool
+import org.jenkinsci.plugins.docker.commons.tools.DockerToolInstaller
+import hudson.tools.InstallSourceProperty
+import jenkins.model.Jenkins
+
+println "------ Configure Dockertools -------------------------------------"
 println ""
 
-def inst = Jenkins.getInstance()
-def desc = inst.getDescriptor("hudson.model.JDK")
+def descriptor = Jenkins.getInstance().getDescriptor("org.jenkinsci.plugins.docker.commons.tools.DockerTool")
 
-// Define and configure a number of JDK installations
-def versions = [
-  "JDK Latest" : "jdk-8u102-oth-JPR",
-  "JDK 8u102"  : "jdk-8u102-oth-JPR"
+// Define and configure a number of DockerTool installations
+def dockerTools = [
+  "Docker Latest" : "1.12.3",
+  "Docker 1.12"   : "1.12.3",
+  "Docker 1.12.3" : "1.12.3",
+  "Docker 1.11"   : "1.11.2",
+  "Docker 1.11.2" : "1.11.2"
 ]
 
-def installations = [];
+// List of Dockertool installations
+def installations = []
 
-for (v in versions) {
-  println "${v.key}: ${v.value}"
-  def installer = new JDKInstaller(v.value, true)
-  def installerProps = new InstallSourceProperty([installer])
-  def installation = new JDK(v.key, "", [installerProps])
+// Remove existing Dockertool installations (/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool)
+def dir = "${System.getenv("JENKINS_HOME")}/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool"
+def dockertoolDir = new File(dir)
+if ( dockertoolDir.deleteDir()) {
+  println "Dockertool directory ${dir} deleted successfully\n"
+}
+
+// Configure the Dockertools
+for (tool in dockerTools) {
+  def installer = new DockerToolInstaller(tool.key, tool.value)
+  def installSourceProp = new InstallSourceProperty([installer])
+  def installation = new DockerTool(tool.key, null, [installSourceProp])
   installations.push(installation)
 }
 
-// Persist the JDK configuration
-desc.setInstallations(installations.toArray(new JDK[0]))
-desc.save() 
+// Persist the Dockertool configuration
+descriptor.setInstallations(installations.toArray(new DockerTool[0]))
+descriptor.save()
+
+// Print installed Docker tool versions
+descriptor.getInstallations().each{DockerTool tool -> println "${tool.getName()} : ${dockerTools[tool.getName()]}" }
 
 println ""
 println "------ END ---------------------------------------------------------"
