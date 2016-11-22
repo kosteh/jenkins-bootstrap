@@ -1,13 +1,7 @@
 /*
 
 Purpose:
-Configures a number of JDK auto-installers.
-
-Used API:
-http://javadoc.jenkins.io/hudson/model/JDK.html
-
-Usage:
-Define one or more versions in the "tools" map.
+Configures a number of JDK auto-installers in a Jenkins instance.
 
 Todo:
 Find out how to delete the slaves' "tools" directory
@@ -24,9 +18,13 @@ println ""
 
 // Define and configure a number of DockerTool installations
 def tools = [
-  "JDK Latest" : "jdk-8u102-oth-JPR",
-  "JDK 8"      : "jdk-8u102-oth-JPR",
-  "JDK 8u102"  : "jdk-8u102-oth-JPR",
+  "JDK Latest" : "jdk-8u112-oth-JPR",
+  "JDK 8"      : "jdk-8u112-oth-JPR",
+  "JDK 8u112"  : "jdk-8u112-oth-JPR",
+  "JDK 7"      : "jdk-7u80-oth-JPR",
+  "JDK 7u80"   : "jdk-7u80-oth-JPR",
+  "JDK 6"      : "jdk-6u45-oth-JPR",
+  "JDK 6u45"   : "jdk-6u45-oth-JPR"
 ]
 
 // Remove existing Dockertool installations (/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool)
