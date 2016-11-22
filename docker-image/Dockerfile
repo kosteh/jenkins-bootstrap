@@ -13,7 +13,9 @@ FROM jenkins:2.19.1
 MAINTAINER SOO Support "soo@kadaster.nl"
 
 # Install all wanted plugins 
-RUN /usr/local/bin/install-plugins.sh github-organization-folder \
+RUN /usr/local/bin/install-plugins.sh docker-commons \
+                                      docker-plugin \
+                                      github-organization-folder \
                                       greenballs \
                                       ldap \
                                       locale \
