@@ -1,21 +1,21 @@
 /*
 
 Purpose:
-Configures a number of Docker tool auto-installers.
+Configures a number of JDK auto-installers.
 
 Used API:
-http://javadoc.jenkins.io/plugin/docker-commons/index.html?org/jenkinsci/plugins/docker/commons/tools
+http://javadoc.jenkins.io/hudson/model/JDK.html
 
 Usage:
-Define one or more versions in the "versions" map.
+Define one or more versions in the "tools" map.
 
 Todo:
 Find out how to delete the slaves' "tools" directory
 
 */
 
-import org.jenkinsci.plugins.docker.commons.tools.DockerTool
-import org.jenkinsci.plugins.docker.commons.tools.DockerToolInstaller
+import hudson.model.JDK
+import hudson.model.JDKInstaller
 import hudson.tools.InstallSourceProperty
 import jenkins.model.Jenkins
 
