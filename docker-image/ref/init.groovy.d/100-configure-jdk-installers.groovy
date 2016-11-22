@@ -15,7 +15,7 @@ Find out how to delete the slaves' "tools" directory
 */
 
 import hudson.model.JDK
-import hudson.model.JDKInstaller
+import hudson.tools.JDKInstaller
 import hudson.tools.InstallSourceProperty
 import jenkins.model.Jenkins
 
