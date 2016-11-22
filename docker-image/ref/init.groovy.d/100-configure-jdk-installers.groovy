@@ -3,9 +3,6 @@
 Purpose:
 Configures a number of JDK auto-installers in a Jenkins instance.
 
-Todo:
-Find out how to delete the slaves' "tools" directory
-
 */
 
 import hudson.model.JDK
