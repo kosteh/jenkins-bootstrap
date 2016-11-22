@@ -43,7 +43,7 @@ def descriptor = Jenkins.getInstance().getDescriptor("hudson.model.JDK")
 for (tool in tools) {
   def installer = new JDKInstaller(tool.value, true)
   def installSourceProp = new InstallSourceProperty([installer])
-  def installation = new JDK(jdk.key, null, [installSourceProp])
+  def installation = new JDK(tool.key, null, [installSourceProp])
   installations.push(installation)
 }
 
@@ -52,7 +52,7 @@ descriptor.setInstallations(installations.toArray(new JDK[0]))
 descriptor.save()
 
 // Print installed Docker tool versions
-descriptor.getInstallations().each { DockerTool tool -> println "${tool.getName()} : ${tools[tool.getName()]}" }
+descriptor.getInstallations().each { JDK tool -> println "${tool.getName()} : ${tools[tool.getName()]}" }
 
 println ""
 println "------ END ---------------------------------------------------------"
