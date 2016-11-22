@@ -28,6 +28,7 @@ def tools = [
 ]
 
 // Remove existing Dockertool installations (/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool)
+// TODO: find out how to remove the directory on a Jenkins agent.
 def dir = "${System.getenv("JENKINS_HOME")}/tools/hudson.model.JDK"
 def toolDir = new File(dir)
 if ( toolDir.deleteDir()) {
