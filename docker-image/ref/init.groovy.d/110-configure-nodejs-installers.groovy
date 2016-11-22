@@ -35,7 +35,7 @@ def descriptor = Jenkins.getInstance().getDescriptor("jenkins.plugins.nodejs.too
 for (tool in tools) {
   def installer = new NodeJSInstaller(tool.value, "bower bower-art", 100)
   def installSourceProp = new InstallSourceProperty([installer])
-  def installation = new NodeJSInstallation(tool.key, null, [installSourceProp])
+  def installation = new NodeJSInstallation(tool.key, "", [installSourceProp])
   installations.push(installation)
 }
 
