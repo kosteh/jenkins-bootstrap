@@ -6,16 +6,29 @@ import jenkins.model.Jenkins
 println "------ Configure Docker client ---------------------------------"
 println ""
 
-def descriptor = new DockerTool.DescriptorImpl();
+def descriptor = Jenkins.getInstance().getDescriptor("org.jenkinsci.plugins.docker.commons.tools.DockerTool")
+
+// Define and configure a number of JDK installations
+def versions = [
+  "Docker Latest" : "1.12.3",
+  "Docker 1.12"   : "1.12.3",
+  "Docker 1.12.3" : "1.12.3",
+  "Docker 1.11"   : "1.11.2",
+  "Docker 1.12.3" : "1.11.2"
+]
 
 if (descriptor.getInstallations()) {
-    println 'skip Docker Tool installations'
+    println 'Docker Tools already configured'
 } else {
-    //Jenkins.instance.updateCenter.getById('default').updateDirectlyNow(true)
-    def dockerInstaller = new DockerToolInstaller('Docker1.12.3', "1.12.3")
-    def docker = new DockerTool("Docker-1.12", null, [new InstallSourceProperty([dockerInstaller])])
-    descriptor.setInstallations(docker)
-}
+    for (v in versions) {
+        println "${v.key}: ${v.value}"
+        def dockerInstaller = new DockerToolInstaller(v.key, v.value)
+        def installerProps = new InstallSourceProperty([dockerInstaller])
+        def installation = DockerTool(v.key, null, [installerProps])
+        descriptor.setInstallations(docker)
+    }
+}   
+print descriptor.getInstallations()
 
 println ""
 println "------ END ---------------------------------------------------------"
