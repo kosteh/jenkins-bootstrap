@@ -1,7 +1,7 @@
 /*
 
 Purpose:
-Configures a number of JDK auto-installers in a Jenkins instance.
+Configures a number of Maven auto-installers in a Jenkins instance.
 
 */
 
