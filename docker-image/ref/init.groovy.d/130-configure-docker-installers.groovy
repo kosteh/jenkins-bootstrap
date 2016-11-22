@@ -3,15 +3,6 @@
 Purpose:
 Configures a number of Docker tool auto-installers.
 
-Used API:
-http://javadoc.jenkins.io/plugin/docker-commons/index.html?org/jenkinsci/plugins/docker/commons/tools
-
-Usage:
-Define one or more versions in the "versions" map.
-
-Todo:
-Find out how to delete the slaves' "tools" directory
-
 */
 
 import org.jenkinsci.plugins.docker.commons.tools.DockerTool
@@ -32,6 +23,7 @@ def tools = [
 ]
 
 // Remove existing Dockertool installations (/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool)
+// TODO: find out how to remove the directory on a Jenkins agent.
 def dir = "${System.getenv("JENKINS_HOME")}/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool"
 def toolDir = new File(dir)
 if ( toolDir.deleteDir()) {
