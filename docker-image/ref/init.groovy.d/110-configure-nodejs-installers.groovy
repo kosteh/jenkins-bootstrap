@@ -13,11 +13,11 @@ println ""
 
 // Define a number of NodeJS installations
 def tools = [
-  "NodeJS Latest"      : "NodeJS 6.7.0",
-  "NodeJS 6.7.0"       : "NodeJS 6.7.0",
-  "NodeJS 6"           : "NodeJS 6.2.0",
-  "NodeJS 4"           : "NodeJS 4.1.2",
-  "NodeJS 4 (Windows)" : "NodeJS 4.4.4"
+  "NodeJS Latest"      : "6.7.0",
+  "NodeJS 6.7.0"       : "6.7.0",
+  "NodeJS 6"           : "6.2.0",
+  "NodeJS 4"           : "4.1.2",
+  "NodeJS 4 (Windows)" : "4.4.4"
 ]
 
 // Remove existing NodeJS installations from the "tools" directory.
