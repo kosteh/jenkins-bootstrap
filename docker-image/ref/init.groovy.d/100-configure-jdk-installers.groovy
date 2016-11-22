@@ -13,7 +13,7 @@ import jenkins.model.Jenkins
 println "------ Configure JDKs ------------------------------------------------"
 println ""
 
-// Define and configure a number of DockerTool installations
+// Define a number of JDK installations
 def tools = [
   "JDK Latest" : "jdk-8u112-oth-JPR",
   "JDK 8"      : "jdk-8u112-oth-JPR",
@@ -24,7 +24,7 @@ def tools = [
   "JDK 6u45"   : "jdk-6u45-oth-JPR"
 ]
 
-// Remove existing Dockertool installations (/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool)
+// Remove existing JDK installations from the "tools" directory.
 // TODO: find out how to remove the directory on a Jenkins agent.
 def dir = "${System.getenv("JENKINS_HOME")}/tools/hudson.model.JDK"
 def toolDir = new File(dir)
@@ -32,7 +32,7 @@ if ( toolDir.deleteDir()) {
   println "Tool directory ${dir} deleted successfully\n"
 }
 
-// Configure the Dockertools
+// Configure the JDKs
 def installations = []
 def descriptor = Jenkins.getInstance().getDescriptor("hudson.model.JDK")
 
@@ -43,11 +43,11 @@ for (tool in tools) {
   installations.push(installation)
 }
 
-// Persist the Dockertool configuration
+// Persist the JDK configuration
 descriptor.setInstallations(installations.toArray(new JDK[0]))
 descriptor.save()
 
-// Print installed Docker tool versions
+// Print installed JDK versions
 descriptor.getInstallations().each { JDK tool -> println "${tool.getName()} : ${tools[tool.getName()]}" }
 
 println ""
