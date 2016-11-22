@@ -19,42 +19,40 @@ import org.jenkinsci.plugins.docker.commons.tools.DockerToolInstaller
 import hudson.tools.InstallSourceProperty
 import jenkins.model.Jenkins
 
-println "------ Configure Dockertools -------------------------------------"
+println "------ Configure JDKs ------------------------------------------------"
 println ""
 
 // Define and configure a number of DockerTool installations
-def dockerTools = [
-  "Docker Latest" : "1.12.3",
-  "Docker 1.12"   : "1.12.3",
-  "Docker 1.12.3" : "1.12.3",
-  "Docker 1.11"   : "1.11.2",
-  "Docker 1.11.2" : "1.11.2"
+def tools = [
+  "JDK Latest" : "jdk-8u102-oth-JPR",
+  "JDK 8"      : "jdk-8u102-oth-JPR",
+  "JDK 8u102"  : "jdk-8u102-oth-JPR",
 ]
 
 // Remove existing Dockertool installations (/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool)
-def dir = "${System.getenv("JENKINS_HOME")}/tools/org.jenkinsci.plugins.docker.commons.tools.DockerTool"
-def dockertoolDir = new File(dir)
-if ( dockertoolDir.deleteDir()) {
-  println "Dockertool directory ${dir} deleted successfully\n"
+def dir = "${System.getenv("JENKINS_HOME")}/tools/hudson.model.JDK"
+def toolDir = new File(dir)
+if ( toolDir.deleteDir()) {
+  println "Tool directory ${dir} deleted successfully\n"
 }
 
 // Configure the Dockertools
 def installations = []
-def descriptor = Jenkins.getInstance().getDescriptor("org.jenkinsci.plugins.docker.commons.tools.DockerTool")
+def descriptor = Jenkins.getInstance().getDescriptor("hudson.model.JDK")
 
-for (tool in dockerTools) {
-  def installer = new DockerToolInstaller(tool.key, tool.value)
+for (tool in tools) {
+  def installer = new JDKInstaller(tool.value, true)
   def installSourceProp = new InstallSourceProperty([installer])
-  def installation = new DockerTool(tool.key, null, [installSourceProp])
+  def installation = new JDK(jdk.key, null, [installSourceProp])
   installations.push(installation)
 }
 
 // Persist the Dockertool configuration
-descriptor.setInstallations(installations.toArray(new DockerTool[0]))
+descriptor.setInstallations(installations.toArray(new JDK[0]))
 descriptor.save()
 
 // Print installed Docker tool versions
-descriptor.getInstallations().each { DockerTool tool -> println "${tool.getName()} : ${dockerTools[tool.getName()]}" }
+descriptor.getInstallations().each { DockerTool tool -> println "${tool.getName()} : ${tools[tool.getName()]}" }
 
 println ""
 println "------ END ---------------------------------------------------------"
